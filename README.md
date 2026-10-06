@@ -246,8 +246,7 @@ pizza-sales-analysis/
 ├── screenshots/
 │   └── ...                          # query output screenshots
 ├── docs/
-│   ├── PIZZA_SALES_ANALYSIS.pdf
-
+│   └── Pizza_Sales_Analysis.pdf
 └── powerbi/                         # coming soon
     ├── pizza_sales_dashboard.pbix
     └── dashboard_screenshots/
