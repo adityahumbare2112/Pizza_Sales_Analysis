@@ -262,7 +262,7 @@ pizza-sales-analysis/
 ## 👤 About Me
 **Aditya Kishor Humbare** — SQL and Power BI professional with a Mechanical Engineering background, currently targeting roles in SQL development, data analysis and database support.
 
-- 🔗 LinkedIn: *add your link*
+- 🔗 LinkedIn: http://www.linkedin.com/in/aditya-humbare
 - 💻 GitHub: *add your link*
 
 ⭐ If you found this project useful, feel free to star the repo!
