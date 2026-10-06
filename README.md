@@ -82,7 +82,7 @@ This project turns raw order-line data into answers that can support decisions o
 
 ## 🧮 SQL Analysis & Results
 
-The complete script is in [`sql/pizza_sales_analysis.sql`](sql/pizza_sales_analysis.sql). Screenshots of every output are in [`screenshots/`](screenshots/) and the full write-up is in the PDF/DOCX under `docs/`.
+The complete script is in [`sql/pizza_sales_analysis.sql`](sql/pizza_sales_analysis.sql) and the full write-up is in the PDF under `docs/Pizza_Sales_Analysis.pdf`.
 
 ### A. KPIs
 
