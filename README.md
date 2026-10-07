@@ -269,11 +269,9 @@ pizza-sales-analysis/
 ├── sql/
 │   └── pizza_sales_analysis.sql     # all 15 queries
 ├── docs/
-│   ├── PIZZA_SALES_ANALYSIS.pdf
-│   └── PIZZA_SALES_ANALYSIS.docx
+│   └── PIZZA_SALES_ANALYSIS.pdf
 └── powerbi/
-    ├── Pizza_Sales_Analysis.pbix
-    └── dashboard_screenshots/
+    └──Pizza_Sales_Analysis.pbix
 ```
 
 ## ▶️ How to Run
