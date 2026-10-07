@@ -4,7 +4,7 @@ An end-to-end sales analysis of a pizza restaurant's transaction data. The proje
 
 > **Project status**
 > - ✅ Phase 1: SQL analysis (15 business queries) — **Completed**
-> - 🚧 Phase 2: Power BI dashboard (Power Query + DAX measures) — **In progress**
+> - ✅ Phase 2: Power BI dashboard (Power Query + DAX measures) — **Completed**
 
 ---
 
@@ -16,7 +16,7 @@ An end-to-end sales analysis of a pizza restaurant's transaction data. The proje
 5. [SQL Analysis & Results](#-sql-analysis--results)
 6. [Key Insights](#-key-insights)
 7. [Recommendations](#-recommendations)
-8. [Power BI Phase (Upcoming)](#-power-bi-phase-upcoming)
+8. [Power BI Dashboard](#-power-bi-dashboard)
 9. [Repository Structure](#-repository-structure)
 10. [How to Run](#-how-to-run)
 11. [About Me](#-about-me)
@@ -52,7 +52,7 @@ This project turns raw order-line data into answers that can support decisions o
 ## 🛠 Tools & Skills
 - **MySQL / MySQL Workbench** — data analysis and querying
 - **SQL concepts used:** aggregate functions, `GROUP BY`, `ORDER BY`, `LIMIT`, `DISTINCT`, subqueries, date functions (`STR_TO_DATE`, `DAYNAME`, `MONTHNAME`), `ROUND`, aliasing
-- **Power BI** *(upcoming)* — Power Query, DAX measures, interactive dashboard
+- **Power BI Desktop** — Power Query (MySQL connection and data transformation), DAX measures, interactive 2-page dashboard
 - **Git & GitHub** — version control and documentation
 
 ## ❓ Business Questions Answered
@@ -82,7 +82,7 @@ This project turns raw order-line data into answers that can support decisions o
 
 ## 🧮 SQL Analysis & Results
 
-The complete script is in [`sql/pizza_sales_analysis.sql`](sql/pizza_sales_analysis.sql) and the full write-up is in the PDF under [`docs/Pizza_Sales_Analysis.pdf`](docs/Pizza_Sales_Analysis.pdf).
+The complete script is in [`sql/pizza_sales_analysis.sql`](sql/pizza_sales_analysis.sql). The full write-up, with every query and its output screenshot, is in the PDF/DOCX under [`docs/`](docs/).
 
 ### A. KPIs
 
@@ -225,14 +225,39 @@ LIMIT 5;
 - **Menu review:** Review the Brie Carre Pizza (rework, reprice, or replace) and consider bundling low sellers like Mediterranean, Calabrese and Spinach Supreme with popular items.
 - **Upsell:** Because Large sells best, test combo deals that nudge Medium buyers up to Large, and review whether XL/XXL are worth keeping.
 
-## 📊 Power BI Phase (Upcoming)
-The same analysis will be rebuilt as an interactive dashboard:
+## 📊 Power BI Dashboard
+The same questions were rebuilt as an interactive two-page dashboard in Power BI Desktop, connected directly to the MySQL table (`pizza_db.pizza_sales`). The file is in [`powerbi/Pizza_Sales_Analysis.pbix`](powerbi/Pizza_Sales_Analysis.pbix).
 
-- [ ] Data cleaning and type fixes in **Power Query** (date conversion, data types, derived columns)
-- [ ] **DAX measures:** Total Revenue, Total Orders, Total Pizzas Sold, Avg Order Value, Avg Pizzas per Order, % of Sales
-- [ ] Visuals: daily and monthly trends, category and size share, top/bottom 5 pizzas
-- [ ] Slicers for month, category and size
-- [ ] Dashboard screenshots and `.pbix` file added to this repo
+### Power Query (data preparation)
+- Connected to the local MySQL database `pizza_db` and loaded the `pizza_sales` table
+- Changed `order_date` to the **Date** data type
+- Replaced pizza size codes with readable labels (S → Regular, M → Medium, L → Large, XL → X-Large)
+- Added **Day Name**, **Day Number** (Sunday = 1 … Saturday = 7, used to sort days in the right order), **Month Name** and **Month Number** columns
+
+### DAX measures
+```DAX
+Total Revenue            = SUM('pizza_db pizza_sales'[total_price])
+Total Orders             = DISTINCTCOUNT('pizza_db pizza_sales'[order_id])
+Total Pizzas Sold        = SUM('pizza_db pizza_sales'[quantity])
+Average Order Value      = [Total Revenue] / [Total Orders]
+Average Pizzas Per Order = [Total Pizzas Sold] / [Total Orders]
+```
+
+Two calculated columns create short labels for the charts:
+```DAX
+Order Day   = UPPER(LEFT('pizza_db pizza_sales'[Day Name], 3))
+Order Month = UPPER(LEFT('pizza_db pizza_sales'[Month Name], 3))
+```
+
+### Dashboard pages
+| Page | What it shows |
+|---|---|
+| **Home** | KPI cards (revenue, orders, pizzas sold, average order value, average pizzas per order), monthly orders (area chart), daily orders (column chart), revenue by pizza size (donut), revenue by category (donut), pizzas sold by category (funnel) |
+| **Best/Worst Sellers** | Bar charts of the best and worst pizzas by **revenue**, **quantity sold** and **number of orders** |
+
+Both pages have **slicers** for pizza category and order date, plus page navigation buttons.
+
+> 📸 *Dashboard screenshots: see [`powerbi/dashboard_screenshots/`](powerbi/dashboard_screenshots/).*
 
 ## 📁 Repository Structure
 ```
@@ -243,12 +268,11 @@ pizza-sales-analysis/
 │   └── pizza_sales.csv              # dataset (or link if file is large)
 ├── sql/
 │   └── pizza_sales_analysis.sql     # all 15 queries
-├── screenshots/
-│   └── ...                          # query output screenshots
 ├── docs/
-│   └── Pizza_Sales_Analysis.pdf
-└── powerbi/                         # coming soon
-    ├── pizza_sales_dashboard.pbix
+│   ├── PIZZA_SALES_ANALYSIS.pdf
+│   └── PIZZA_SALES_ANALYSIS.docx
+└── powerbi/
+    ├── Pizza_Sales_Analysis.pbix
     └── dashboard_screenshots/
 ```
 
@@ -257,11 +281,12 @@ pizza-sales-analysis/
 2. Create a database and import `pizza_sales.csv` into a table named `pizza_sales`.
 3. Keep `order_date` as text in `dd-mm-yyyy` format (the queries convert it using `STR_TO_DATE`).
 4. Open `sql/pizza_sales_analysis.sql` in Workbench and run the queries one by one.
+5. To explore the dashboard, open `powerbi/Pizza_Sales_Analysis.pbix` in **Power BI Desktop**. It was built on a local MySQL connection (`localhost`, database `pizza_db`), so to refresh the data, load the same table into your own MySQL server or update the data source under **Transform data > Data source settings**.
 
 ## 👤 About Me
 **Aditya Kishor Humbare** — SQL and Power BI professional with a Mechanical Engineering background, currently targeting roles in SQL development, data analysis and database support.
 
-- 🔗 LinkedIn: https://www.linkedin.com/in/aditya-humbare
-- 💻 GitHub: https://github.com/adityahumbare2112
+- 🔗 LinkedIn: *add your link*
+- 💻 GitHub: *add your link*
 
 ⭐ If you found this project useful, feel free to star the repo!
