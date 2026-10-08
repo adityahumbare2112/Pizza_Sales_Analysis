@@ -267,7 +267,6 @@ Order Month = UPPER(LEFT('pizza_db pizza_sales'[Month Name], 3))
 
 Both pages have **slicers** for pizza category and order date, plus page navigation buttons.
 
-> 📸 *Dashboard screenshots: see [`powerbi/dashboard_screenshots/`](powerbi/dashboard_screenshots/).*
 
 ## 📁 Repository Structure
 ```
