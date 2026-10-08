@@ -8,6 +8,16 @@ An end-to-end sales analysis of a pizza restaurant's transaction data. The proje
 
 ---
 
+## Dashboard Preview
+
+### Homepage
+![Homepage](screenshots/Homepage.png)
+
+### Best & Worst Sellers
+![Best and Worst Sellers](screenshots/Best-Worst%20Sellers.png)
+
+---
+
 ## 📌 Table of Contents
 1. [Business Problem](#-business-problem)
 2. [Dataset](#-dataset)
